@@ -1,0 +1,20 @@
+#root {
+  max-width: 1280px;
+  margin: 0;
+  padding: 0; // !!!!!!!!!!!!! scroll
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.app {
+  max-width: 1280px;
+  background-color: var(--background);
+  min-width: 100%;
+  min-height: 100vh;
+}
