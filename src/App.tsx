@@ -4,14 +4,14 @@ import { ManagerDashboard } from "./pages/ManagerDashboard";
 import { SalesPersonDashboard } from "./pages/SalesPersonDashboard";
 import { Login } from "./pages/Login";
 import "./App.scss";
+import { NavBar } from "./components/NavBar";
 
 function App() {
 
   return (
-    <>
-      <div></div>
-      <h1>Suivi Commercial</h1>
-      <div className="card"></div>
+    <div className="app">
+      <NavBar/>
+      {/* <SideBar/> */}
 
       <Routes>
         <Route path="/" element={<Login />} />
@@ -24,7 +24,7 @@ function App() {
         />{" "}
         <Route path="*" element={<Login />} />
       </Routes>
-    </>
+    </div>
   );
 }
 

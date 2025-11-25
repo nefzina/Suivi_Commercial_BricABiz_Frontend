@@ -10,14 +10,13 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --background : #f6f6f6;
-  --light-blue : #54bccb;
-  --medium-blue : #3c7ff8;
-  --dark-blue : #1f4893;
-  --text-color-grey : #818181;
-  --title-color-black: #292d2e;
+  --background: #f6f6f6;
+  --light-blue: #54bccb;
+  --medium-blue: #3c7ff8;
+  --dark-blue: #1f4893;
+  --light-grey: #818181;
+  --dark-grey: #292d2e;
   --white: #ffffff;
-
 }
 
 a {
@@ -31,30 +30,38 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: var(--white);
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  color: var(--dark-grey);
+}
+
+ul,
+li,
+p {
+  color: var(--light-grey);
 }
 
 button {
   border-radius: 8px;
-  border: 1px solid transparent;
+  border: 1px solid var(--medium-blue);
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--white);
   cursor: pointer;
   transition: border-color 0.25s;
+  color: var(--medium-blue);
 }
 button:hover {
-  border-color: #646cff;
+  border-color: var(--dark-blue);
+  color: var(--dark-blue);
 }
 button:focus,
 button:focus-visible {

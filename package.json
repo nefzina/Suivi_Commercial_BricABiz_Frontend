@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "dev-full": "cross-env-shell \"concurrently -c yellow,blue \\\"npm run dev-front\\\" \\\"npm run dev --prefix ../Suivi_Commercial_BricABiz_Backend\\\"\"",
+    "dev-full": "cross-env-shell \"concurrently -c yellow,blue \\\"npm run dev\\\" \\\"npm run dev --prefix ../Suivi_Commercial_BricABiz_Backend\\\"\"",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
