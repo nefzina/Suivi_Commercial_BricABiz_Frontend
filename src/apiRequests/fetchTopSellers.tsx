@@ -1,5 +1,4 @@
 import axios from "axios";
-import type { User } from "../types/User";
 import type { TopSeller } from "../types/TopSeller";
 
 export async function fetchTopSellers(
