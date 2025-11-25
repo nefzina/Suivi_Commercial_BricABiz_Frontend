@@ -1,0 +1,38 @@
+.kpi-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  
+    .kpi-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+  
+      .title {
+        font-size: 0.9rem;
+        color: var(--light-grey);
+        font-weight: 500;
+      }
+  
+      .value {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--dark-grey);
+      }
+  
+      .trend {
+        font-size: 0.8rem;
+        color: green;
+      }
+    }
+  
+    // @media (min-width: 768px) {
+    //   grid-template-columns: repeat(2, 1fr);
+    // }
+  }
+  
