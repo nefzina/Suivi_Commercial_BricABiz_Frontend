@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { fetchTopSellers } from "../apiRequests/fetchTopSellers";
-import type { User } from "../types/User";
 import type { TopSeller } from "../types/TopSeller";
 import "../styles/topSellers.scss";
 
