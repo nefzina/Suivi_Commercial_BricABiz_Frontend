@@ -10,20 +10,16 @@ import { Doughnut } from "react-chartjs-2";
 import { fetchTopProducts } from "../apiRequests/fetchTopProducts";
 import type { TopProduct } from "../types/TopProducts";
 import "../styles/productCA.scss";
+import { generateColors } from "../services/generateColors";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-function generateColors(count: number) {
-  return Array.from({ length: count }).map((_, i) => {
-    const hue = (i * (360 / count)) % 360;
-    return {
-      bg: `hsl(${hue}, 70%, 70%)`,
-      border: `hsl(${hue}, 70%, 40%)`,
-    };
-  });
+interface Dates {
+  fromDate: string;
+  toDate: string;
 }
 
-export function ProductCA() {
+export function ProductCA({ fromDate, toDate }: Dates) {
   const [chartData, setChartData] = useState<ChartData<"doughnut">>({
     labels: [],
     datasets: [
@@ -38,30 +34,34 @@ export function ProductCA() {
   });
 
   const [productsList, setProductsList] = useState<TopProduct[]>([]);
-  const fromDate = "2025-08-30";
-  const toDate = "2025-11-26";
 
   useEffect(() => {
     const loadingTopProducts = async () => {
+      let isMounted = true;
       try {
         const list: TopProduct[] = await fetchTopProducts(fromDate, toDate);
 
         const colors = generateColors(list.length);
 
-        setChartData({
-          labels: list.map((o) => o._id),
-          datasets: [
-            {
-              label: "CA par produit",
-              data: list.map((o) => o.totalCA),
-              backgroundColor: colors.map((c) => c.bg),
-              borderColor: colors.map((c) => c.border),
-              borderWidth: 1,
-            },
-          ],
-        });
+        if (isMounted)
+          setChartData({
+            labels: list.map((o) => `${o._id} - ${o.totalQty} unités vendues`),
+            datasets: [
+              {
+                label: "CA par produit",
+                data: list.map((o) => o.totalCA),
+                backgroundColor: colors.map((c) => c.bg),
+                borderColor: colors.map((c) => c.border),
+                borderWidth: 1,
+              },
+            ],
+          });
       } catch (error) {
         console.error("Failed to fetch products:", error);
+      } finally {
+        return () => {
+          isMounted = false;
+        };
       }
     };
 
