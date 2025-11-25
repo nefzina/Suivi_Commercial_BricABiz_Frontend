@@ -3,10 +3,13 @@ import { fetchTopSellers } from "../apiRequests/fetchTopSellers";
 import type { TopSeller } from "../types/TopSeller";
 import "../styles/topSellers.scss";
 
-export function TopSalesPerson() {
+interface Dates {
+  fromDate: string;
+  toDate: string;
+}
+
+export function TopSalesPerson({ fromDate, toDate }: Dates) {
   const [sellersList, setSellersList] = useState<TopSeller[]>([]);
-  const fromDate = "2025-08-30";
-  const toDate = "2025-11-26";
 
   useEffect(() => {
     const loadingSalesPersons = async () => {
@@ -38,6 +41,7 @@ export function TopSalesPerson() {
             <div className="left-container">
               <p className="name">{seller._id}</p>
               <p className="totalCA">{seller.totalCA} € de CA</p>
+              {/* <p>{seller.}</p> */}
             </div>
             <p className="rightContainer">{i + 1}</p>
           </li>

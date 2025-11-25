@@ -1,17 +1,18 @@
 import axios from "axios";
-import type { TopProducts } from "../types/TopProducts";
+import type { TopProduct } from "../types/TopProducts";
 
 export async function fetchTopProducts(
   fromDate: string,
   toDate: string
-): Promise<TopProducts[]> {
+): Promise<TopProduct[]> {
   try {
-    const res = await axios.get<TopProducts[]>(
+    const res = await axios.get<TopProduct[]>(
       `${
         import.meta.env.VITE_BACKEND_URL
       }/salesReports/sells/product?from=${fromDate}&to=${toDate}`
     );
-
+      console.log("top prod", res.data);
+      
     return res.data;
   } catch (error) {
     console.error("Failed to fetch top products.");
