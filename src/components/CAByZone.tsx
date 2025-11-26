@@ -8,9 +8,10 @@ import {
 import { useEffect, useState } from "react";
 import { Pie } from "react-chartjs-2";
 import { generateColors } from "../services/generateColors";
-import type { CAByZone } from "../types/CAByZone";
-import { fetchCAByZone } from "../apiRequests/fetchCAByZone";
+import type { CAByZone } from "../types/CA";
+
 import "../styles/caByZone.scss";
+import { fetchCAByZone } from "../apiRequests/fetchCA";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -60,7 +61,7 @@ export function CAPerZone({fromDate, toDate}: Dates) {
     };
 
     loadingCAByZone();
-  }, []);
+  }, [fromDate, toDate]);
 
   return (
     <div className="caByZoneChart">

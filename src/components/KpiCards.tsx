@@ -1,20 +1,26 @@
 import { useEffect, useState } from "react";
-import { fetchCA, fetchNbSells } from "../apiRequests/fetch_CA_NbSells";
+import { fetchWonSales, fetchSalesPersonCA, fetchSalespersonNbSells } from "../apiRequests/fetchSells";
 import "../styles/kpiCards.scss";
+import { fetchTotalCA } from "../apiRequests/fetchCA";
 
-interface Dates {
+interface Inputs {
   fromDate: string;
   toDate: string;
+  salesPersonId: string;
+  titles: string[];
 }
-export function KpiCards({ fromDate, toDate }: Dates) {
+export function KpiCards({ fromDate, toDate, salesPersonId, titles }: Inputs) {
   const [totalCA, setTotalCA] = useState<number>(0);
-  const [nbSells, setNbSells] = useState<number>(0);
+  const [wonSales, setwonSales] = useState<number>(0);
 
   useEffect(() => {
     const loadingCA = async () => {
       let isMounted = true;
       try {
-        const ca: number = await fetchCA(fromDate, toDate);
+        const ca: number = !!salesPersonId 
+        ? await fetchSalesPersonCA(fromDate, toDate, salesPersonId)
+        : await fetchTotalCA(fromDate, toDate);
+        
         if (isMounted) setTotalCA(ca);
       } catch (error) {
         console.error("Failed to fetch CA:", error);
@@ -25,14 +31,17 @@ export function KpiCards({ fromDate, toDate }: Dates) {
       }
     };
     loadingCA();
-  }, []);
+  }, [fromDate, toDate]);
 
   useEffect(() => {
     const loadingNbSells = async () => {
       let isMounted = true;
       try {
-        const ca: number = await fetchNbSells(fromDate, toDate);
-        if (isMounted) setNbSells(ca);
+        const nbSells: number = !!salesPersonId 
+        ? await fetchSalespersonNbSells(fromDate, toDate, salesPersonId)
+        : await fetchWonSales(fromDate, toDate);
+        
+        if (isMounted) setwonSales(nbSells);
       } catch (error) {
         console.error("Failed to fetch CA:", error);
       } finally {
@@ -53,7 +62,7 @@ export function KpiCards({ fromDate, toDate }: Dates) {
 
       <div className="kpi-card">
         <p className="title">Nombre de vente</p>
-        <p className="value"> {nbSells} </p>
+        <p className="value"> {wonSales} </p>
       </div>
     </div>
   );

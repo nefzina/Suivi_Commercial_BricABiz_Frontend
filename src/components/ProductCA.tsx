@@ -66,7 +66,7 @@ export function ProductCA({ fromDate, toDate }: Dates) {
     };
 
     loadingTopProducts();
-  }, []);
+  }, [fromDate, toDate]);
 
   return (
     <div className="productCAChart">
