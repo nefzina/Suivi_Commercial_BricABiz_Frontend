@@ -11,7 +11,6 @@ export async function fetchTopProducts(
         import.meta.env.VITE_BACKEND_URL
       }/salesReports/sells/product?from=${fromDate}&to=${toDate}`
     );
-      console.log("top prod", res.data);
       
     return res.data;
   } catch (error) {
