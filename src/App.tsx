@@ -1,10 +1,10 @@
-import { useState } from "react";
 import { Route, Routes } from "react-router";
 import { ManagerDashboard } from "./pages/ManagerDashboard";
 import { SalesPersonDashboard } from "./pages/SalesPersonDashboard";
 import { Login } from "./pages/Login";
 import "./App.scss";
 import { NavBar } from "./components/NavBar";
+// import CreateSalesReport from "./pages/addSalesReport";
 
 function App() {
 
@@ -22,6 +22,10 @@ function App() {
           path="/salesPersonDashboard"
           element={<SalesPersonDashboard />}
         />{" "}
+        <Route
+          path="/createsalereport"
+          // element={<CreateSalesReport />}
+        />
         <Route path="*" element={<Login />} />
       </Routes>
     </div>

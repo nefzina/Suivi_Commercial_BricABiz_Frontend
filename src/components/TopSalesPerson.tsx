@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchTopSellers } from "../apiRequests/fetchTopSellers";
-import type { TopSeller } from "../types/TopSeller";
 import "../styles/topSellers.scss";
+import type { TopSeller } from "../types/User";
 
 interface Dates {
   fromDate: string;
@@ -10,6 +10,7 @@ interface Dates {
 
 export function TopSalesPerson({ fromDate, toDate }: Dates) {
   const [sellersList, setSellersList] = useState<TopSeller[]>([]);
+  const [tabToDisplay, setTabToDisplay] = useState<string>("CA");
 
   useEffect(() => {
     const loadingSalesPersons = async () => {
@@ -30,18 +31,17 @@ export function TopSalesPerson({ fromDate, toDate }: Dates) {
       }
     };
     loadingSalesPersons();
-  }, []);
+  }, [fromDate, toDate]);
 
   return (
     <div className="topSeller-container">
-      <h3>Top Seller</h3>
+      <h3>Top Commercial</h3>
       <div className="list">
         {sellersList.map((seller, i) => (
           <li key={seller._id}>
             <div className="left-container">
               <p className="name">{seller._id}</p>
               <p className="totalCA">{seller.totalCA} € de CA</p>
-              {/* <p>{seller.}</p> */}
             </div>
             <p className="rightContainer">{i + 1}</p>
           </li>
